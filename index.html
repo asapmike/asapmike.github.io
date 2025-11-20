@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -8,9 +8,9 @@
     <style>
         /* --- 1. 全局样式设置 --- */
         :root {
-            --primary-color: #0056b3;
-            /* 南科大蓝 */
-            --secondary-color: #f4f4f9;
+            --primary-color: #e77728;
+            /* 温暖橙色 */
+            --secondary-color: #fff9f0;
             --text-dark: #333;
             --text-light: #666;
             --white: #ffffff;
@@ -20,13 +20,20 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
             margin: 0;
             color: var(--text-dark);
             background-color: var(--secondary-color);
+            line-height: 1.6;
         }
 
-        /* --- 2. 语言切换核心逻辑 (Magic!) --- */
+        /* --- 2. 新增：主布局样式 --- */
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* --- 3. 语言切换核心逻辑 (Magic!) --- */
         /* 中文模式下：隐藏所有英文元素 */
         body.lang-cn .en {
             display: none !important;
@@ -54,64 +61,104 @@
             display: inline !important;
         }
 
-        /* --- 3. 导航栏样式 --- */
-        nav {
-            background: var(--white);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            /* 固定在顶部 */
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-            height: 60px;
+        /* --- 4. 左侧边栏 (基础信息) --- */
+        .sidebar {
+            width: 40%;
+            max-width: 450px;
+            padding: 50px 40px;
             box-sizing: border-box;
-        }
-
-        nav .logo {
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-        }
-
-        nav ul {
-            list-style: none;
+            position: sticky;
+            top: 0;
+            height: 100vh;
             display: flex;
-            padding: 0;
+            flex-direction: column;
+            justify-content: space-between;
+            /* 让页脚内容沉底 */
+        }
+
+        .sidebar-header {
+            text-align: left;
+        }
+
+        .profile-pic {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .sidebar h1 {
             margin: 0;
-            align-items: center;
-        }
-
-        nav ul li {
-            margin-left: 20px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
+            font-size: 2.5rem;
             color: var(--text-dark);
-            font-weight: 500;
+        }
+
+        .sidebar p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-top: 10px;
+        }
+
+        /* 导航样式调整 */
+        .sidebar nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 40px 0;
+        }
+
+        .sidebar nav ul li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar nav ul li a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: bold;
+            font-size: 1.1rem;
             transition: color 0.3s;
         }
 
-        nav ul li a:hover {
+        .sidebar nav ul li a:hover {
             color: var(--primary-color);
         }
 
-        /* 切换按钮样式 */
+        /* 页脚联系信息 */
+        .sidebar-footer {
+            font-size: 0.9rem;
+        }
+
+        .sidebar-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .sidebar-footer .social-links a {
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        /* --- 5. 右侧内容区 --- */
+        .content {
+            width: 60%;
+            padding: 50px 40px;
+            background-color: var(--white);
+        }
+
+        /* --- 6. 通用组件样式 (按钮、卡片等) --- */
+        /* 语言切换按钮 */
         .lang-btn {
             border: 2px solid var(--primary-color);
-            background: white;
+            background: transparent;
             color: var(--primary-color);
-            padding: 5px 15px;
+            padding: 8px 18px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 0.9rem;
             transition: all 0.3s;
-            margin-left: 20px;
+            margin-top: 20px;
+            display: inline-block;
         }
 
         .lang-btn:hover {
@@ -119,68 +166,22 @@
             color: white;
         }
 
-        /* 新增：个人头像样式 */
-        .profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            /* 圆形 */
-            border: 4px solid white;
-            object-fit: cover;
-            /* 保证图片不变形 */
-            margin-bottom: 20px;
-        }
-
-        /* --- 4. 页面各板块样式 --- */
-        header {
-            background: linear-gradient(135deg, #0056b3, #00a8e8);
-            color: white;
-            padding: 140px 20px 80px;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.8rem;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-top: 10px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 10px 25px;
-            background: white;
-            color: var(--primary-color);
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: transform 0.2s;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
         section {
-            padding: 60px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
+            padding: 0;
+            /* 移除内边距，由父容器控制 */
+            margin-bottom: 60px;
+            /* 增加板块间距 */
         }
 
         h2 {
             border-bottom: 3px solid var(--primary-color);
             display: inline-block;
             margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
         }
 
         .skills-container {
@@ -191,8 +192,8 @@
         }
 
         .skill-tag {
-            background: #e1ecf4;
-            color: #2c5282;
+            background: #ffe8d1;
+            color: #9c4221;
             padding: 5px 15px;
             border-radius: 15px;
             font-size: 0.9rem;
@@ -201,22 +202,22 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr;
+            /* 右侧始终为单列 */
             gap: 20px;
         }
 
         .card {
-            background: var(--white);
+            background: var(--secondary-color);
             padding: 25px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
             border-left: 5px solid var(--primary-color);
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
         }
 
         .card h3 {
@@ -248,10 +249,9 @@
         }
 
         .edu-item {
-            background: white;
+            background: var(--secondary-color);
             padding: 25px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         .edu-date {
@@ -260,36 +260,34 @@
             margin-bottom: 10px;
         }
 
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            background: #333;
-            color: white;
-            margin-top: 40px;
-        }
+        /* --- 7. 手机端适配 --- */
+        @media (max-width: 900px) {
+            .main-container {
+                flex-direction: column;
+            }
 
-        footer a {
-            color: #00a8e8;
-            text-decoration: none;
-        }
+            .sidebar,
+            .content {
+                width: 100%;
+                position: static;
+                height: auto;
+                padding: 40px 25px;
+            }
 
-        /* 手机适配 */
-        @media (max-width: 600px) {
-            header h1 {
+            .sidebar {
+                padding-bottom: 20px;
+            }
+
+            .content {
+                padding-top: 20px;
+            }
+
+            .sidebar h1 {
                 font-size: 2rem;
             }
-
-            nav ul {
-                display: none;
-            }
-
-            /* 手机上隐藏菜单文字，保留按钮 */
-            nav {
-                justify-content: space-between;
-            }
         }
 
-        /* --- 5. 交互动画样式 --- */
+        /* --- 8. 交互动画样式 --- */
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
@@ -301,6 +299,500 @@
             transform: translateY(0);
         }
     </style>
+</head>
+
+<body class="lang-en">
+
+    <div class="main-container">
+        <!-- ================== 左侧边栏 (基础信息) ================== -->
+        <aside class="sidebar">
+            <div>
+                <header class="sidebar-header">
+                    <img src="profile.png" alt="A photo of Li La" class="profile-pic">
+                    <h1 class="cn">李拉</h1>
+                    <h1 class="en">Li La</h1>
+                    <p class="cn">南科大 数据科学与大数据技术</p>
+                    <p class="en">Data Science @ SUSTech</p>
+                </header>
+
+                <nav>
+                    <ul>
+                        <li><a href="#about"><span class="cn">关于</span><span class="en">About</span></a></li>
+                        <li><a href="#education"><span class="cn">教育</span><span class="en">Education</span></a></li>
+                        <li><a href="#experience"><span class="cn">经历</span><span class="en">Experience</span></a></li>
+                        <li><a href="#projects"><span class="cn">项目</span><span class="en">Projects</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <footer class="sidebar-footer">
+                <div class="social-links">
+                    <a href="mailto:12410505@mail.sustech.edu.cn">Email</a>
+                    <a href="https://github.com/asapmike" target="_blank">GitHub</a>
+                </div>
+                <button class="lang-btn" onclick="toggleLanguage()">English / 中文</button>
+            </footer>
+        </aside>
+
+        <!-- ================== 右侧内容区 (可滚动) ================== -->
+        <main class="content">
+
+            <section id="about" class="fade-in">
+                <h2 class="cn">关于我</h2>
+                <h2 class="en">About Me</h2>
+
+                <p class="cn">我是<b>南方科技大学 (SUSTech)</b> 数据科学专业的本科生。我拥有扎实的编程基础和出色的英语沟通能力（雅思阅读听力满分）。</p>
+                <p class="en">I am a sophomore majoring in <b>Data Science</b> at <b>SUSTech</b>. I have a solid
+                    programming
+                    foundation and excellent English communication skills (Full marks in IELTS Reading & Listening).</p>
+
+                <p class="cn">目前，我专注于<b>人工智能应用落地</b>，特别是在 AI Agent 调试与知识库搭建方面有实战经验。同时，我也具备独立开发 Java GUI 应用和使用 Python
+                    进行统计建模的能力。
+                </p>
+                <p class="en">Currently, I focus on <b>Applied AI</b>, specifically in AI Agent tuning and Knowledge
+                    Base
+                    construction. I am also proficient in developing Java GUI applications and statistical modeling with
+                    Python.
+                </p>
+
+                <h3 class="cn" style="margin-top: 30px;">核心技能</h3>
+                <h3 class="en" style="margin-top: 30px;">Core Skills</h3>
+                <div class="skills-container">
+                    <span class="skill-tag">Java (Swing/OOP)</span>
+                    <span class="skill-tag">Python (Data Science)</span>
+                    <span class="skill-tag">AI Agent Tuning</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Git/GitHub</span>
+                    <span class="skill-tag">IELTS 8.0</span>
+                </div>
+            </section>
+
+            <section id="education" class="fade-in">
+                <h2 class="cn">教育背景</h2>
+                <h2 class="en">Education</h2>
+
+                <div class="edu-item fade-in">
+                    <h3 class="cn">南方科技大学 (SUSTech)</h3>
+                    <h3 class="en">Southern University of Science and Technology (SUSTech)</h3>
+
+                    <div class="edu-date">
+                        <span class="cn">2024.09 - 2028.07 (预计) | 深圳</span>
+                        <span class="en">2024.09 - 2028.07 (Expected) | Shenzhen</span>
+                    </div>
+
+                    <p class="cn"><b>专业：数据科学与大数据技术</b> | <b>GPA: 3.76 / 4.0</b></p>
+                    <p class="en"><b>Major: Data Science & Big Data Technology</b> | <b>GPA: 3.76 / 4.0</b></p>
+
+                    <ul class="cn">
+                        <li><b>核心课程:</b> 线性代数、统计学导论、概率论基础、计算机程序设计基础 (Java)、高等数学。</li>
+                        <li><b>英语能力:</b> 学术英语写作优异，雅思总分 8.0（阅读 9.0，听力 9.0）。</li>
+                    </ul>
+                    <ul class="en">
+                        <li><b>Core Courses:</b> Linear Algebra, Intro to Statistics, Probability, Java Programming,
+                            Calculus.</li>
+                        <li><b>English:</b> Excellent Academic Writing. IELTS 8.0 (Reading 9.0, Listening 9.0).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="experience" class="fade-in">
+                <h2 class="cn">实习经历</h2>
+                <h2 class="en">Professional Experience</h2>
+
+                <div class="projects-grid">
+
+                    <div class="card fade-in">
+                        <h3 class="cn">深圳君润人力有限公司</h3>
+                        <h3 class="en">Shenzhen Junrun Human Resources</h3>
+
+                        <span class="role cn">AI 实习生 | 知识库搭建与 Agent 调试</span>
+                        <span class="role en">AI Intern | Knowledge Base & Agent Tuning</span>
+
+                        <div class="tech-stack">
+                            <span class="cn">地点: 深圳 | 2025.07 - 2025.08</span>
+                            <span class="en">Location: Shenzhen | 2025.07 - 2025.08</span>
+                        </div>
+
+                        <ul class="cn">
+                            <li>负责公司 AI 客服系统的<b>知识库文档搭建</b>，整理并优化业务数据以提升 AI 回答准确率。</li>
+                            <li>参与 <b>AI Agent 的调试与测试</b>，优化智能体的对话逻辑与任务执行能力，助力企业自动化服务落地。</li>
+                            <li>协助团队解决 AI 模型在实际业务场景中的 Edge Case 问题。</li>
+                        </ul>
+                        <ul class="en">
+                            <li>Built the <b>Knowledge Base</b> for the AI customer service system, optimizing data to
+                                improve
+                                response accuracy.</li>
+                            <li>Participated in <b>AI Agent tuning and testing</b>, optimizing dialogue logic and task
+                                execution
+                                for enterprise automation.</li>
+                            <li>Assisted the team in resolving Edge Cases for AI models in real-world business
+                                scenarios.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card fade-in">
+                        <h3 class="cn">陕西直行者教育有限公司</h3>
+                        <h3 class="en">Brave Advancer Education Ltd.</h3>
+
+                        <span class="role cn">雅思/托福 助教</span>
+                        <span class="role en">Teaching Assistant (IELTS/TOEFL)</span>
+
+                        <div class="tech-stack">
+                            <span class="cn">2024.12 - 2025.01</span>
+                            <span class="en">2024.12 - 2025.01</span>
+                        </div>
+
+                        <ul class="cn">
+                            <li>职务：面向高中及大学阶段学生，提供雅思/托福一对一学习支持。</li>
+                            <li>内容：涵盖答疑、单词听写、作业批改与口语纠音。</li>
+                            <li>成果：利用自身雅思 8.0 的高分经验，帮助学生显著提升英语听说读写能力。</li>
+                        </ul>
+                        <ul class="en">
+                            <li><b>Role:</b> Provided one-on-one tutoring for high school and university students.</li>
+                            <li><b>Tasks:</b> Covered Q&A, vocabulary dictation, homework grading, and speaking
+                                correction.</li>
+                            <li><b>Impact:</b> Leveraged personal IELTS 8.0 experience to help students improve their
+                                English
+                                proficiency.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="projects" class="fade-in">
+                <h2 class="cn">项目经验</h2>
+                <h2 class="en">Projects</h2>
+
+                <div class="projects-grid">
+
+                    <div class="card fade-in">
+                        <h3 class="cn">NBA 球队胜负预测项目</h3>
+                        <h3 class="en">NBA Win/Loss Prediction</h3>
+
+                        <span class="role cn">项目负责人 | 统计学导论课程项目</span>
+                        <span class="role en">Project Lead | Intro to Statistics Course Project</span>
+
+                        <div class="tech-stack">Tech: Python, Logistic Regression, Random Forest</div>
+
+                        <ul class="cn">
+                            <li><b>主导规划：</b>组织团队分工，协调数据收集、模型设计与结果呈现全流程。</li>
+                            <li><b>建模分析：</b>使用 Python 进行数据清洗，实现逻辑回归与随机森林算法，撰写预测结果分析报告。</li>
+                            <li><b>成果展示：</b>负责汇报内容的整合与表达设计，清晰呈现建模逻辑与实际预测效果。</li>
+                        </ul>
+                        <ul class="en">
+                            <li><b>Leadership:</b> Led team division, coordinated data collection, model design, and
+                                result
+                                presentation.</li>
+                            <li><b>Modeling:</b> Used Python for data cleaning and implemented Logistic Regression and
+                                Random
+                                Forest algorithms.</li>
+                            <li><b>Presentation:</b> Designed the final presentation to clearly demonstrate modeling
+                                logic and
+                                prediction results.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card fade-in">
+                        <h3 class="cn">华容道游戏开发</h3>
+                        <h3 class="en">Klotski (Huarong Road) Game Dev</h3>
+
+                        <span class="role cn">联合负责人 | Java 课程项目</span>
+                        <span class="role en">Co-Lead | Java Course Project</span>
+
+                        <div class="tech-stack">Tech: Java, Swing GUI, OOP</div>
+
+                        <ul class="cn">
+                            <li><b>架构设计：</b>独立开发华容道游戏，实现 GUI 与核心逻辑分离的架构。</li>
+                            <li><b>面向对象：</b>封装 GamePanel, GameFrame 等核心类，保证代码的可维护性与扩展性。</li>
+                            <li><b>全栈实现：</b>从底层算法到前端界面交互的完整实现，掌握了 Java 事件处理机制。</li>
+                        </ul>
+                        <ul class="en">
+                            <li><b>Architecture:</b> Developed the game independently, separating GUI from core logic.
+                            </li>
+                            <li><b>OOP:</b> Encapsulated core classes like GamePanel and GameFrame for maintainability.
+                            </li>
+                            <li><b>Full Stack:</b> Built the entire application from backend algorithms to frontend UI
+                                interaction.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        function toggleLanguage() {
+            const body = document.body;
+            if (body.classList.contains('lang-cn')) {
+                body.classList.remove('lang-cn');
+                body.classList.add('lang-en');
+            } else {
+                body.classList.remove('lang-en');
+                body.classList.add('lang-cn');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.1
+            });
+
+            const targets = document.querySelectorAll('.fade-in');
+            targets.forEach(target => {
+                observer.observe(target);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
+align-items: center;
+padding: 0 5%;
+height: 60px;
+box-sizing: border-box;
+}
+
+nav .logo {
+font-weight: bold;
+font-size: 1.2rem;
+color: var(--primary-color);
+}
+
+nav ul {
+list-style: none;
+display: flex;
+padding: 0;
+margin: 0;
+align-items: center;
+}
+
+nav ul li {
+margin-left: 20px;
+}
+
+nav ul li a {
+text-decoration: none;
+color: var(--text-dark);
+font-weight: 500;
+transition: color 0.3s;
+}
+
+nav ul li a:hover {
+color: var(--primary-color);
+}
+
+/* 切换按钮样式 */
+.lang-btn {
+border: 2px solid var(--primary-color);
+background: white;
+color: var(--primary-color);
+padding: 5px 15px;
+border-radius: 20px;
+cursor: pointer;
+font-weight: bold;
+font-size: 0.9rem;
+transition: all 0.3s;
+margin-left: 20px;
+}
+
+.lang-btn:hover {
+background: var(--primary-color);
+color: white;
+}
+
+/* 新增：个人头像样式 */
+.profile-pic {
+width: 150px;
+height: 150px;
+border-radius: 50%;
+/* 圆形 */
+border: 4px solid white;
+object-fit: cover;
+/* 保证图片不变形 */
+margin-bottom: 20px;
+}
+
+/* --- 4. 页面各板块样式 --- */
+header {
+background: linear-gradient(135deg, #0056b3, #00a8e8);
+color: white;
+padding: 140px 20px 80px;
+text-align: center;
+}
+
+header h1 {
+margin: 0;
+font-size: 2.8rem;
+}
+
+header p {
+font-size: 1.2rem;
+opacity: 0.9;
+margin-top: 10px;
+max-width: 700px;
+margin-left: auto;
+margin-right: auto;
+}
+
+.btn {
+display: inline-block;
+margin-top: 25px;
+padding: 10px 25px;
+background: white;
+color: var(--primary-color);
+text-decoration: none;
+border-radius: 25px;
+font-weight: bold;
+transition: transform 0.2s;
+cursor: pointer;
+}
+
+.btn:hover {
+transform: translateY(-3px);
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+section {
+padding: 60px 20px;
+max-width: 1000px;
+margin: 0 auto;
+}
+
+h2 {
+border-bottom: 3px solid var(--primary-color);
+display: inline-block;
+margin-bottom: 30px;
+}
+
+.skills-container {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+margin-top: 15px;
+}
+
+.skill-tag {
+background: #e1ecf4;
+color: #2c5282;
+padding: 5px 15px;
+border-radius: 15px;
+font-size: 0.9rem;
+font-weight: 600;
+}
+
+.projects-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 20px;
+}
+
+.card {
+background: var(--white);
+padding: 25px;
+border-radius: 8px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+border-left: 5px solid var(--primary-color);
+transition: transform 0.3s;
+}
+
+.card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+margin-top: 0;
+margin-bottom: 5px;
+}
+
+.card .role {
+font-weight: bold;
+color: var(--text-dark);
+display: block;
+margin-bottom: 5px;
+}
+
+.card .tech-stack {
+font-size: 0.85rem;
+color: var(--text-light);
+margin-bottom: 15px;
+font-style: italic;
+}
+
+.card ul {
+padding-left: 20px;
+margin-bottom: 0;
+}
+
+.card li {
+margin-bottom: 8px;
+}
+
+.edu-item {
+background: white;
+padding: 25px;
+border-radius: 8px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.edu-date {
+color: var(--text-light);
+font-size: 0.9rem;
+margin-bottom: 10px;
+}
+
+footer {
+text-align: center;
+padding: 40px 20px;
+background: #333;
+color: white;
+margin-top: 40px;
+}
+
+footer a {
+color: #00a8e8;
+text-decoration: none;
+}
+
+/* 手机适配 */
+@media (max-width: 600px) {
+header h1 {
+font-size: 2rem;
+}
+
+nav ul {
+display: none;
+}
+
+/* 手机上隐藏菜单文字，保留按钮 */
+nav {
+justify-content: space-between;
+}
+}
+
+/* --- 5. 交互动画样式 --- */
+.fade-in {
+opacity: 0;
+transform: translateY(20px);
+transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.is-visible {
+opacity: 1;
+transform: translateY(0);
+}
+</style>
 </head>
 
 <body class="lang-en">
