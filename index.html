@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Li La | Data Science Portfolio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>La(Mike) Li | Data Science Portfolio</title>
     <style>
         /* --- 1. 全局样式设置 --- */
         :root {
@@ -127,16 +127,52 @@
         /* 页脚联系信息 */
         .sidebar-footer {
             font-size: 0.9rem;
+            margin-top: 30px;
         }
 
-        .sidebar-footer a {
-            color: var(--primary-color);
+        .contact-info ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        .contact-info li {
+            margin-bottom: 12px;
+        }
+
+        .contact-info a {
             text-decoration: none;
+            color: var(--text-light);
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
         }
 
-        .sidebar-footer .social-links a {
-            margin-right: 15px;
+        .contact-info a:hover {
+            color: var(--primary-color);
+        }
+
+        .contact-info .icon {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
             font-weight: bold;
+        }
+
+        /* 新增：反爬虫样式 */
+        .contact-info .obfuscate {
+            unicode-bidi: bidi-override;
+            direction: rtl;
+        }
+
+        .contact-info .phone-cn::before {
+            content: '电话: ';
+        }
+
+        .contact-info .phone-en::before {
+            content: 'Phone: +86 ';
         }
 
         /* --- 5. 右侧内容区 --- */
@@ -308,9 +344,9 @@
         <aside class="sidebar">
             <div>
                 <header class="sidebar-header">
-                    <img src="profile.png" alt="A photo of Li La" class="profile-pic">
+                    <img src="profile.png" alt="A photo of La(Mike) Li" class="profile-pic" />
                     <h1 class="cn">李拉</h1>
-                    <h1 class="en">Li La</h1>
+                    <h1 class="en">La(Mike) Li</h1>
                     <p class="cn">南科大 数据科学与大数据技术</p>
                     <p class="en">Data Science @ SUSTech</p>
                 </header>
@@ -326,10 +362,26 @@
             </div>
 
             <footer class="sidebar-footer">
-                <div class="social-links">
-                    <a href="mailto:12410505@mail.sustech.edu.cn">Email</a>
-                    <a href="mailto:mikeleeflame@gmail.com">Gmail</a>
-                    <a href="https://github.com/asapmike" target="_blank">GitHub</a>
+                <div class="contact-info">
+                    <ul>
+                        <!-- 邮箱：使用 [at] 和 [dot] 防止爬虫 -->
+                        <li><a><span class="icon">📧</span>
+                                <span class="cn">校邮: </span><span class="en">Email: </span>
+                                <span>12410505[at]mail[dot]sustech[dot]edu[dot]cn</span>
+                            </a></li>
+                        <li><a><span class="icon">📫</span>
+                                <span>Gmail: </span>
+                                <span>mikeleeflame[at]gmail[dot]com</span>
+                            </a></li>
+                        <!-- 电话：用 CSS 拼接，HTML 中数字倒序排列 -->
+                        <li><a><span class="icon">📞</span>
+                                <span class="cn phone-cn"></span><span class="en phone-en"></span>
+                                <span class="obfuscate">4082-9319-931</span>
+                            </a></li>
+                        <!-- GitHub 链接保持不变 -->
+                        <li><a href="https://github.com/asapmike" target="_blank"><span class="icon">🐙</span>GitHub</a>
+                        </li>
+                    </ul>
                 </div>
                 <button class="lang-btn" onclick="toggleLanguage()">English / 中文</button>
             </footer>
