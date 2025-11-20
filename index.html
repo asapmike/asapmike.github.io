@@ -179,8 +179,25 @@
         .content {
             width: 60%;
             padding: 50px 40px;
+            padding: 40px;
             background-color: var(--white);
         }
+
+        /* 新增：右侧内容区顶部的横幅背景 */
+        .content-header {
+            height: 200px;
+            margin: -40px -40px 40px -40px;
+            /* 利用负边距撑满顶部 */
+            /* 将半透明黑色渐变叠加在背景图上，形成遮罩效果 */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('backgound_cropped.png');
+            background-size: cover;
+            background-position: center 25%;
+            /* 调整图片垂直位置，更聚焦于上半部分 */
+            border-radius: 0 0 10px 10px;
+            /* 给底部添加圆角 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
 
         /* --- 6. 通用组件样式 (按钮、卡片等) --- */
         /* 语言切换按钮 */
@@ -389,6 +406,9 @@
 
         <!-- ================== 右侧内容区 (可滚动) ================== -->
         <main class="content">
+
+            <!-- 1. 在这里添加横幅背景 -->
+            <div class="content-header"></div>
 
             <section id="about" class="fade-in">
                 <h2 class="cn">关于我</h2>
