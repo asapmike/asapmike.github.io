@@ -119,6 +119,18 @@
             color: white;
         }
 
+        /* 新增：个人头像样式 */
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            /* 圆形 */
+            border: 4px solid white;
+            object-fit: cover;
+            /* 保证图片不变形 */
+            margin-bottom: 20px;
+        }
+
         /* --- 4. 页面各板块样式 --- */
         header {
             background: linear-gradient(135deg, #0056b3, #00a8e8);
@@ -307,6 +319,9 @@
     </nav>
 
     <header>
+        <!-- 1. 添加你的头像图片 -->
+        <img src="profile.png" alt="A photo of Li La" class="profile-pic">
+
         <h1 class="cn">我是 李拉 (Li La)</h1>
         <h1 class="en">I am Li La</h1>
 
