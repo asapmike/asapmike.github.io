@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>La(Mike) Li | Data Science Portfolio</title>
     <style>
@@ -174,6 +174,17 @@
             font-weight: bold;
         }
 
+        /* 让邮箱地址在必要时可以换到新的一行 */
+        .contact-info a {
+            flex-wrap: wrap;
+            /* 允许 flex 子元素换行 */
+        }
+
+        .contact-info .email-address {
+            flex-basis: 100%;
+            /* 占据一整行，实现换行效果 */
+        }
+
         /* 新增：反爬虫样式 */
         .contact-info .obfuscate {
             unicode-bidi: bidi-override;
@@ -186,6 +197,14 @@
 
         .contact-info .phone-en::before {
             content: 'Phone: +86 ';
+        }
+
+        /* 新增：允许长文本（如邮箱）在必要时换行 */
+        .contact-info a span:last-child {
+            word-break: break-word;
+            overflow-wrap: break-word;
+            overflow-wrap: break-word;
+            /* 兼容性写法 */
         }
 
         /* --- 5. 右侧内容区 --- */
@@ -414,11 +433,11 @@
                         <!-- 邮箱：使用 [at] 和 [dot] 防止爬虫 -->
                         <li><a><span class="icon">📧</span>
                                 <span class="cn">校邮: </span><span class="en">Email: </span>
-                                <span>12410505[at]mail[dot]sustech[dot]edu[dot]cn</span>
+                                <span class="email-address">12410505[at]mail[dot]sustech[dot]edu[dot]cn</span>
                             </a></li>
                         <li><a><span class="icon">📫</span>
                                 <span>Gmail: </span>
-                                <span>mikeleeflame[at]gmail[dot]com</span>
+                                <span class="email-address">mikeleeflame[at]gmail[dot]com</span>
                             </a></li>
                         <li><a href="https://www.xiaohongshu.com/user/profile/65c5bc70000000000903f76d" target="_blank">
                                 <span class="icon">📕</span><span class="cn">小红书</span><span class="en">RedNote</span>
@@ -688,13 +707,9 @@
                 }
             }
 
-            // 页面加载时先执行一次
             changeNav();
-            // 滚动时持续执行
             window.addEventListener('scroll', changeNav);
-            // --- 导航高亮结束 ---
 
-            // --- 第三板斧 (3/3): "返回顶部" 按钮的 JS 逻辑 ---
             const backToTopButton = document.querySelector(".back-to-top");
 
             window.addEventListener("scroll", () => {
@@ -706,7 +721,6 @@
                     backToTopButton.style.visibility = "hidden";
                 }
             });
-            // --- "返回顶部" 逻辑结束 ---
 
         });
     </script>
