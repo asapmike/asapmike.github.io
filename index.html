@@ -101,6 +101,11 @@
             margin-top: 10px;
         }
 
+        /* 联系信息移到名字下方后的样式调整 */
+        .sidebar-header .contact-info {
+            margin-top: 30px;
+        }
+
         /* 导航样式调整 */
         .sidebar nav ul {
             list-style: none;
@@ -178,7 +183,6 @@
         /* --- 5. 右侧内容区 --- */
         .content {
             width: 60%;
-            padding: 50px 40px;
             padding: 40px;
             background-color: var(--white);
         }
@@ -202,6 +206,12 @@
         /* --- 6. 通用组件样式 (按钮、卡片等) --- */
         /* 语言切换按钮 */
         .lang-btn {
+            position: fixed;
+            /* 固定在页面上 */
+            top: 25px;
+            right: 40px;
+            z-index: 1001;
+            /* 确保在最上层 */
             border: 2px solid var(--primary-color);
             background: transparent;
             color: var(--primary-color);
@@ -210,8 +220,6 @@
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s;
-            margin-top: 20px;
-            display: inline-block;
         }
 
         .lang-btn:hover {
@@ -356,6 +364,9 @@
 
 <body class="lang-en">
 
+    <!-- 1. 将语言切换按钮移动到这里 -->
+    <button class="lang-btn" onclick="toggleLanguage()">English / 中文</button>
+
     <div class="main-container">
         <!-- ================== 左侧边栏 (基础信息) ================== -->
         <aside class="sidebar">
@@ -367,19 +378,7 @@
                     <p class="cn">南科大 数据科学与大数据技术</p>
                     <p class="en">Data Science @ SUSTech</p>
                 </header>
-
-                <nav>
-                    <ul>
-                        <li><a href="#about"><span class="cn">关于</span><span class="en">About</span></a></li>
-                        <li><a href="#education"><span class="cn">教育</span><span class="en">Education</span></a></li>
-                        <li><a href="#experience"><span class="cn">经历</span><span class="en">Experience</span></a></li>
-                        <li><a href="#projects"><span class="cn">项目</span><span class="en">Projects</span></a></li>
-                    </ul>
-                </nav>
-            </div>
-
-            <footer class="sidebar-footer">
-                <div class="contact-info">
+                <div class="contact-info" style="font-size: 0.9rem;">
                     <ul>
                         <!-- 邮箱：使用 [at] 和 [dot] 防止爬虫 -->
                         <li><a><span class="icon">📧</span>
@@ -390,6 +389,10 @@
                                 <span>Gmail: </span>
                                 <span>mikeleeflame[at]gmail[dot]com</span>
                             </a></li>
+                        <li><a href="https://www.xiaohongshu.com/user/profile/65c5bc70000000000903f76d" target="_blank">
+                                <span class="icon">📕</span><span class="cn">小红书</span><span class="en">RedNote</span>
+                            </a>
+                        </li>
                         <!-- 电话：用 CSS 拼接，HTML 中数字倒序排列 -->
                         <li><a><span class="icon">📞</span>
                                 <span class="cn phone-cn"></span><span class="en phone-en"></span>
@@ -400,8 +403,18 @@
                         </li>
                     </ul>
                 </div>
-                <button class="lang-btn" onclick="toggleLanguage()">English / 中文</button>
-            </footer>
+
+                <nav>
+                    <ul>
+                        <li><a href="#about"><span class="cn">关于</span><span class="en">About</span></a></li>
+                        <li><a href="#projects"><span class="cn">项目</span><span class="en">Projects</span></a></li>
+                        <li><a href="#experience"><span class="cn">经历</span><span class="en">Experience</span></a></li>
+                        <li><a href="#education"><span class="cn">教育</span><span class="en">Education</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <footer class="sidebar-footer"></footer>
         </aside>
 
         <!-- ================== 右侧内容区 (可滚动) ================== -->
@@ -468,6 +481,66 @@
                 </div>
             </section>
 
+            <section id="projects" class="fade-in">
+                <h2 class="cn">项目经验</h2>
+                <h2 class="en">Projects</h2>
+
+                <div class="projects-grid">
+
+                    <div class="card fade-in">
+                        <h3 class="cn">NBA 球队胜负预测项目</h3>
+                        <h3 class="en">NBA Win/Loss Prediction</h3>
+
+                        <span class="role cn">项目负责人 | 统计学导论课程项目</span>
+                        <span class="role en">Project Lead | Intro to Statistics Course Project</span>
+
+                        <div class="tech-stack">Tech: Python, Logistic Regression, Random Forest</div>
+
+                        <ul class="cn">
+                            <li><b>主导规划：</b>组织团队分工，协调数据收集、模型设计与结果呈现全流程。</li>
+                            <li><b>建模分析：</b>使用 Python 进行数据清洗，实现逻辑回归与随机森林算法，撰写预测结果分析报告。</li>
+                            <li><b>成果展示：</b>负责汇报内容的整合与表达设计，清晰呈现建模逻辑与实际预测效果。</li>
+                        </ul>
+                        <ul class="en">
+                            <li><b>Leadership:</b> Led team division, coordinated data collection, model design, and
+                                result
+                                presentation.</li>
+                            <li><b>Modeling:</b> Used Python for data cleaning and implemented Logistic Regression and
+                                Random
+                                Forest algorithms.</li>
+                            <li><b>Presentation:</b> Designed the final presentation to clearly demonstrate modeling
+                                logic and
+                                prediction results.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card fade-in">
+                        <h3 class="cn">华容道游戏开发</h3>
+                        <h3 class="en">Klotski (Huarong Road) Game Dev</h3>
+
+                        <span class="role cn">联合负责人 | Java 课程项目</span>
+                        <span class="role en">Co-Lead | Java Course Project</span>
+
+                        <div class="tech-stack">Tech: Java, Swing GUI, OOP</div>
+
+                        <ul class="cn">
+                            <li><b>架构设计：</b>独立开发华容道游戏，实现 GUI 与核心逻辑分离的架构。</li>
+                            <li><b>面向对象：</b>封装 GamePanel, GameFrame 等核心类，保证代码的可维护性与扩展性。</li>
+                            <li><b>全栈实现：</b>从底层算法到前端界面交互的完整实现，掌握了 Java 事件处理机制。</li>
+                        </ul>
+                        <ul class="en">
+                            <li><b>Architecture:</b> Developed the game independently, separating GUI from core logic.
+                            </li>
+                            <li><b>OOP:</b> Encapsulated core classes like GamePanel and GameFrame for maintainability.
+                            </li>
+                            <li><b>Full Stack:</b> Built the entire application from backend algorithms to frontend UI
+                                interaction.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
             <section id="experience" class="fade-in">
                 <h2 class="cn">实习经历</h2>
                 <h2 class="en">Professional Experience</h2>
@@ -527,66 +600,6 @@
                             <li><b>Impact:</b> Leveraged personal IELTS 8.0 experience to help students improve their
                                 English
                                 proficiency.</li>
-                        </ul>
-                    </div>
-
-                </div>
-            </section>
-
-            <section id="projects" class="fade-in">
-                <h2 class="cn">项目经验</h2>
-                <h2 class="en">Projects</h2>
-
-                <div class="projects-grid">
-
-                    <div class="card fade-in">
-                        <h3 class="cn">NBA 球队胜负预测项目</h3>
-                        <h3 class="en">NBA Win/Loss Prediction</h3>
-
-                        <span class="role cn">项目负责人 | 统计学导论课程项目</span>
-                        <span class="role en">Project Lead | Intro to Statistics Course Project</span>
-
-                        <div class="tech-stack">Tech: Python, Logistic Regression, Random Forest</div>
-
-                        <ul class="cn">
-                            <li><b>主导规划：</b>组织团队分工，协调数据收集、模型设计与结果呈现全流程。</li>
-                            <li><b>建模分析：</b>使用 Python 进行数据清洗，实现逻辑回归与随机森林算法，撰写预测结果分析报告。</li>
-                            <li><b>成果展示：</b>负责汇报内容的整合与表达设计，清晰呈现建模逻辑与实际预测效果。</li>
-                        </ul>
-                        <ul class="en">
-                            <li><b>Leadership:</b> Led team division, coordinated data collection, model design, and
-                                result
-                                presentation.</li>
-                            <li><b>Modeling:</b> Used Python for data cleaning and implemented Logistic Regression and
-                                Random
-                                Forest algorithms.</li>
-                            <li><b>Presentation:</b> Designed the final presentation to clearly demonstrate modeling
-                                logic and
-                                prediction results.</li>
-                        </ul>
-                    </div>
-
-                    <div class="card fade-in">
-                        <h3 class="cn">华容道游戏开发</h3>
-                        <h3 class="en">Klotski (Huarong Road) Game Dev</h3>
-
-                        <span class="role cn">联合负责人 | Java 课程项目</span>
-                        <span class="role en">Co-Lead | Java Course Project</span>
-
-                        <div class="tech-stack">Tech: Java, Swing GUI, OOP</div>
-
-                        <ul class="cn">
-                            <li><b>架构设计：</b>独立开发华容道游戏，实现 GUI 与核心逻辑分离的架构。</li>
-                            <li><b>面向对象：</b>封装 GamePanel, GameFrame 等核心类，保证代码的可维护性与扩展性。</li>
-                            <li><b>全栈实现：</b>从底层算法到前端界面交互的完整实现，掌握了 Java 事件处理机制。</li>
-                        </ul>
-                        <ul class="en">
-                            <li><b>Architecture:</b> Developed the game independently, separating GUI from core logic.
-                            </li>
-                            <li><b>OOP:</b> Encapsulated core classes like GamePanel and GameFrame for maintainability.
-                            </li>
-                            <li><b>Full Stack:</b> Built the entire application from backend algorithms to frontend UI
-                                interaction.</li>
                         </ul>
                     </div>
 
