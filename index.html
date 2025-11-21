@@ -101,6 +101,17 @@
             margin-top: 10px;
         }
 
+        /* 新增：让专业介绍也变成可点击链接 */
+        .sidebar-header p a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        .sidebar-header p a:hover {
+            color: var(--primary-color);
+        }
+
         /* 联系信息移到名字下方后的样式调整 */
         .sidebar-header .contact-info {
             margin-top: 30px;
@@ -427,8 +438,14 @@
                     <img src="profile.png" alt="A photo of La(Mike) Li" class="profile-pic" />
                     <h1 class="cn">李拉</h1>
                     <h1 class="en">La(Mike) Li</h1>
-                    <p class="cn">南科大 数据科学与大数据技术</p>
-                    <p class="en">Data Science @ SUSTech</p>
+                    <p class="cn">
+                        <a href="https://stat-ds.sustech.edu.cn" target="_blank" rel="noopener noreferrer">南科大
+                            数据科学与大数据技术</a>
+                    </p>
+                    <p class="en">
+                        <a href="https://stat-ds.sustech.edu.cn" target="_blank" rel="noopener noreferrer">Data Science
+                            @ SUSTech</a>
+                    </p>
                 </header>
                 <div class="contact-info" style="font-size: 0.9rem;">
                     <ul>
