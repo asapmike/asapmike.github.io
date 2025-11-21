@@ -129,6 +129,14 @@
             color: var(--primary-color);
         }
 
+        /* 新增：导航激活状态 */
+        .sidebar nav ul li a.active {
+            color: var(--primary-color);
+            font-weight: 900;
+            /* 加粗 */
+            transform: scale(1.05);
+        }
+
         /* 页脚联系信息 */
         .sidebar-footer {
             font-size: 0.9rem;
@@ -360,6 +368,29 @@
             transform: translateY(0);
         }
     </style>
+
+    <!-- 第三板斧 (1/3): "返回顶部" 按钮的 HTML 结构 -->
+    <a href="#" class="back-to-top">↑</a>
+    <style>
+        /* 第三板斧 (2/3): "返回顶部" 按钮的 CSS 样式 */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-size: 1.5rem;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+    </style>
 </head>
 
 <body class="lang-en">
@@ -440,6 +471,9 @@
                     construction. I am also proficient in developing Java GUI applications and statistical modeling with
                     Python.
                 </p>
+
+                <p class="cn">我也是一名王者荣耀市标大司命。</p>
+                <p class="en">I am also a city-level marked Grand Arbiter in Honor of Kings.</p>
 
                 <h3 class="cn" style="margin-top: 30px;">核心技能</h3>
                 <h3 class="en" style="margin-top: 30px;">Core Skills</h3>
@@ -637,6 +671,43 @@
             targets.forEach(target => {
                 observer.observe(target);
             });
+
+            // --- 第二板斧：导航高亮 ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a');
+
+            function changeNav() {
+                let index = sections.length;
+
+                while (--index && window.scrollY + 100 < sections[index].offsetTop) { }
+
+                navLinks.forEach((link) => link.classList.remove('active'));
+                // 确保对应的链接存在
+                if (navLinks[index]) {
+                    navLinks[index].classList.add('active');
+                }
+            }
+
+            // 页面加载时先执行一次
+            changeNav();
+            // 滚动时持续执行
+            window.addEventListener('scroll', changeNav);
+            // --- 导航高亮结束 ---
+
+            // --- 第三板斧 (3/3): "返回顶部" 按钮的 JS 逻辑 ---
+            const backToTopButton = document.querySelector(".back-to-top");
+
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 300) { // 向下滚动超过 300px 时显示
+                    backToTopButton.style.opacity = "1";
+                    backToTopButton.style.visibility = "visible";
+                } else {
+                    backToTopButton.style.opacity = "0";
+                    backToTopButton.style.visibility = "hidden";
+                }
+            });
+            // --- "返回顶部" 逻辑结束 ---
+
         });
     </script>
 
